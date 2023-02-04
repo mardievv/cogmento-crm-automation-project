@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
     public void LoginNegativeTest(){
         Login login = new Login(driver,softAssert);
         login.navigateToLoginPage();
-        login.loginNegative();
+        login.loginNegative(); 
     }
 
 }
