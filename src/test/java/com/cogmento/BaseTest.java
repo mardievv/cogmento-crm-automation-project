@@ -13,15 +13,16 @@ public class BaseTest {
     protected SoftAssert softAssert;
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() throws InterruptedException {
         driver = Driver.getDriver();
         softAssert = new SoftAssert();
+        Thread.sleep(5000);
     }
 
-    @AfterMethod
-    public void tearDown(){
-        Driver.quitDriver();
-        softAssert.assertAll();
-    }
+//    @AfterMethod
+//    public void tearDown(){
+//        Driver.quitDriver();
+//        softAssert.assertAll();
+//    }
 
 }

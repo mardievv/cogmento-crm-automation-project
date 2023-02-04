@@ -9,16 +9,10 @@ import org.testng.asserts.SoftAssert;
 
 import static com.cogmento.config.ConfigReader.getProperties;
 
-public class Login {
+public class Login extends BasePage {
 
-    private final WebDriver driver;
-
-    private final SoftAssert softAssert;
-
-    public Login(WebDriver driver, SoftAssert softAssert){
-        this.driver = driver;
-        this.softAssert = softAssert;
-        PageFactory.initElements(driver,this);
+    public Login(WebDriver driver, SoftAssert softAssert) {
+        super(driver, softAssert);
     }
 
     @FindBy(name = "email")
