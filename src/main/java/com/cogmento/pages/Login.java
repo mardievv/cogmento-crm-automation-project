@@ -1,10 +1,8 @@
 package com.cogmento.pages;
 
-import com.cogmento.config.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
 import static com.cogmento.config.ConfigReader.getProperties;

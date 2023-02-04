@@ -9,6 +9,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void LoginPositiveTest(){
         Login login = new Login(driver,softAssert);
+
         login.navigateToLoginPage();
         login.login();
     }
@@ -16,6 +17,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void LoginNegativeTest(){
         Login login = new Login(driver,softAssert);
+
         login.navigateToLoginPage();
         login.loginNegative();
     }

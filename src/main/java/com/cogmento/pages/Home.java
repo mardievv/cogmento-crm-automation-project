@@ -33,6 +33,10 @@ public class Home extends BasePage {
     @FindBy(xpath = "//div[@class='ui basic button floating item dropdown']")
     protected WebElement settingsGear;
 
+    @FindBy(xpath = "//div[@class='menu-item-wrapper']//span[text()='Contacts']")
+    private WebElement contacts;
+
+
 
     private String xpath(String path){
         return "//span[text()='"+path+"']";
@@ -60,6 +64,13 @@ public class Home extends BasePage {
         settingsGear.click();
         WebElement logoutLink = driver.findElement(By.xpath(xpath("Log Out")));
         logoutLink.click();
+    }
+
+    protected void navigate(String page){
+        WebElement pageLink = driver.findElement(By.xpath("//div[@class='menu-item-wrapper']//span[text()='" + page + "']"));
+        softAssert.assertTrue(pageLink.isEnabled(),"Page link is not enabled");
+        pageLink.click();
+
     }
 
 }
