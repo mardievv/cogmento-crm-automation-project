@@ -1,6 +1,8 @@
 package com.cogmento.pages;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,10 +49,10 @@ public class Contacts extends Home {
     @FindBy(xpath = "//label[text()='Email']/following-sibling::div//button")
     private WebElement addEmailIcon;
 
-    @FindBy(xpath = "//div[@name='category' and @class='ui selection upward dropdown']")
+    @FindBy(xpath = "//label[text()='Category']/following-sibling::div[@name='category']")
     private WebElement categoryInput;
 
-    @FindBy(xpath = "//div[@name='status' and @class='ui selection upward dropdown']")
+    @FindBy(xpath = "//label[text()='Status']/following-sibling::div[@name='status']")
     private WebElement statusInput;
 
     @FindBy(name = "description")
@@ -59,17 +61,17 @@ public class Contacts extends Home {
     @FindBy(xpath = "//div[@name='channel_type']")
     private WebElement socialChannel;
 
-    @FindBy(xpath = "//input[@name='value' and @placeholder='Twitter handle']")
-    private WebElement twitterHandler;
+    @FindBy(xpath = "//label[text()='Social Channels']/following-sibling::div//input")
+    private WebElement socialChannelLink;
 
     @FindBy(xpath = "//label[text()='Social Channels']/following-sibling::div//button")
     private WebElement addSocialChannelIcon;
 
-    @FindBy(xpath = "//div[@name='timezone']/input")
+    @FindBy(xpath = "//label[text()='Time Zone']/following-sibling::div[@name='timezone']")
     private WebElement timeZoneInput;
 
     @FindBy(name = "address")
-    private WebElement addressInput;
+    private WebElement streetInput;
 
     @FindBy(name = "city")
     private WebElement cityInput;
@@ -87,7 +89,7 @@ public class Contacts extends Home {
     private WebElement addAddressIcon;
 
     @FindBy(xpath = "//div[@name='hint']/input")
-    private WebElement phoneState;
+    private WebElement region;
 
     @FindBy(xpath = "//input[@name='value' and @placeholder='Number']")
     private WebElement phoneNumberInput;
@@ -113,16 +115,16 @@ public class Contacts extends Home {
     @FindBy(xpath = "//div[@name='referred_by']/input")
     private WebElement referredByInput;
 
-    @FindBy(xpath = "//div[@name='source']//div[@class='divider default text']")
+    @FindBy(xpath = "//label[text()='Source']/following-sibling::div")
     private WebElement sourceDropDown;
 
-    @FindBy(name = "do_not_call")
+    @FindBy(xpath = "//label[text()='Do not Call']/following-sibling::div")
     private WebElement doNotCallInput;
 
-    @FindBy(name = "do_not_text")
+    @FindBy(xpath = "//label[text()='Do not Text']/following-sibling::div")
     private WebElement doNotTextInput;
 
-    @FindBy(name = "do_not_email")
+    @FindBy(xpath = "//label[text()='Do not Email']/following-sibling::div")
     private WebElement doNotEmailInput;
 
     @FindBy(name = "day")
@@ -148,7 +150,86 @@ public class Contacts extends Home {
 
     public void createContacts(HashMap<String, String> data) {
         navigate("Contacts");
-        createNewContactBtn.click();
+//        softAssert.assertTrue(createNewContactBtn.isEnabled(),"Create new contact button is not enabled");
+        driver.findElement(By.xpath("//*[@id=\"dashboard-toolbar\"]/div[2]/div/a/button")).click();
+
+        firstNameInput.sendKeys(data.get("firstname"));
+        lastNameInput.sendKeys(data.get("lastname"));
+        middleNameInput.sendKeys(data.get("middlename"));
+        companyInput.sendKeys(data.get("company"));
+
+        if(!data.get("access").equals("Public")){
+            accessBtn.click();
+            usersAllowedAccess.sendKeys("Shakhzod");
+        }
+
+        tagsInput.sendKeys(data.get("tags"));
+        emailInput.sendKeys(data.get("email"));
+        typeOfEmail.sendKeys(data.get("typeOfEmail"));
+
+        //TODO
+        categoryInput.click();
+        WebElement category = driver.findElement(By.xpath("//div/div/span[text()='" + data.get("category") + "']"));
+        category.click();
+
+        //TODO
+        statusInput.click();
+        statusInput.findElement(By.xpath("//div/div/span[text()='"+data.get("status")+"']")).click();
+
+        descriptionTextarea.sendKeys(data.get("description"));
+
+        //TODO
+        socialChannel.click();
+        socialChannel.findElement(By.xpath("//div/div/span[text()='"+data.get("socialChannel")+"']")).click();
+
+        socialChannelLink.sendKeys(data.get("channelLink"));
+
+        //TODO
+        timeZoneInput.click();
+        timeZoneInput.findElement(By.xpath("//div/div/span")).click();
+
+
+        streetInput.sendKeys(data.get("street"));
+        cityInput.sendKeys(data.get("city"));
+        stateInput.sendKeys(data.get("state/county"));
+        zipInput.sendKeys(data.get("zip"));
+
+        //TODO
+        countryDropDown.click();
+        countryDropDown.findElement(By.xpath("//div/div/span[text()='"+data.get("country")+"']"));
+
+
+        region.sendKeys(data.get("region"));
+        phoneNumberInput.sendKeys(data.get("number"));
+        typeOfPhone.sendKeys(data.get("phoneType"));
+        positionInput.sendKeys(data.get("position"));
+        departmentInput.sendKeys(data.get("department"));
+        supervisorInput.sendKeys(data.get("supervisor"));
+        assistantInput.sendKeys(data.get("assistant"));
+        referredByInput.sendKeys(data.get("referredBy"));
+
+        //TODO
+        sourceDropDown.click();
+        sourceDropDown.findElement(By.xpath("//div/div/span[text()='"+data.get("source")+"']")).click();
+
+        if(data.get("call?").equals("yes")){
+            doNotCallInput.click();
+        }
+
+        if(data.get("email?").equals("yes")){
+            doNotEmailInput.click();
+        }
+
+        if(data.get("text?").equals("yes")){
+            doNotTextInput.click();
+        }
+
+        birthDay.sendKeys(data.get("birthday"));
+        birthMonth.sendKeys(data.get("birthmonth"));
+        birthYear.sendKeys(data.get("birthyear"));
+        identifierInput.sendKeys(data.get("identifier"));
+        imageInput.sendKeys(data.get("imagePath"));
+
     }
 
 
