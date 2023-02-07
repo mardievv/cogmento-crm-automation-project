@@ -33,6 +33,9 @@ public class Home extends BasePage {
     @FindBy(xpath = "//div[@class='ui basic button floating item dropdown']")
     protected WebElement settingsGear;
 
+    @FindBy(id = "main-nav")
+    protected WebElement leftNavBarMenu;
+
     @FindBy(xpath = "//div[@class='menu-item-wrapper']//span[text()='Contacts']")
     private WebElement contacts;
 
@@ -67,7 +70,8 @@ public class Home extends BasePage {
     }
 
     protected void navigate(String page){
-        WebElement pageLink = driver.findElement(By.xpath("//div[@class='menu-item-wrapper']//span[text()='" + page + "']"));
+        WebElement pageLink = driver.findElement(By.xpath("//div[@class='menu-item-wrapper']//span[text()='"+page+"']"));
+        actions.moveToElement(leftNavBarMenu).build().perform();
         softAssert.assertTrue(pageLink.isEnabled(),"Page link is not enabled");
         pageLink.click();
 

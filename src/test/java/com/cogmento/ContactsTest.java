@@ -12,7 +12,7 @@ public class ContactsTest extends BaseTest{
 
 
     @Test(dataProvider = "contacts")
-    public void createPositiveContact(HashMap<String,String> data){
+    public void createPositiveContact(HashMap<String,String> data) throws InterruptedException {
         Login login = new Login(driver,softAssert);
         Contacts contacts = new Contacts(driver,softAssert);
 
