@@ -148,9 +148,8 @@ public class Contacts extends Home {
     @FindBy(xpath = "//button[@class='ui button' and text()='Cancel']  ")
     private WebElement cancelBtn;
 
-    public void createContacts(HashMap<String, String> data) throws InterruptedException {
+    public void createContacts(HashMap<String, String> data){
         navigate("Contacts");
-        Thread.sleep(5000);
         softAssert.assertTrue(createContactButton.isEnabled(), "Create button is not enabled");
         createContactButton.click();
 
@@ -169,27 +168,21 @@ public class Contacts extends Home {
         emailInput.sendKeys(data.get("email"));
         typeOfEmail.sendKeys(data.get("typeOfEmail"));
 
-        //TODO
         categoryInput.click();
         WebElement category = driver.findElement(By.xpath("//div/div/span[text()='" + data.get("category") + "']"));
         category.click();
 
-        //TODO
         statusInput.click();
         statusInput.findElement(By.xpath("//div/div/span[text()='"+data.get("status")+"']")).click();
 
         descriptionTextarea.sendKeys(data.get("description"));
 
-        //TODO
         socialChannel.click();
         socialChannel.findElement(By.xpath("//div/div/span[text()='"+data.get("socialChannel")+"']")).click();
 
         socialChannelLink.sendKeys(data.get("channelLink"));
 
-        //TODO
         timeZoneInput.sendKeys(data.get("timezone"));
-//        timeZoneInput.findElement(By.xpath("//div/div/span")).click();
-
 
         streetInput.sendKeys(data.get("street"));
         cityInput.sendKeys(data.get("city"));
@@ -198,10 +191,8 @@ public class Contacts extends Home {
         data.put("zip", (int)Double.parseDouble(data.get("zip"))+"");
         zipInput.sendKeys(data.get("zip"));
 
-        //TODO
         countryDropDown.click();
         countryDropDown.findElement(By.xpath("//div/div/span[text()='"+data.get("country")+"']"));
-
 
         region.sendKeys(data.get("region"));
         phoneNumberInput.sendKeys(data.get("number"));
@@ -212,7 +203,6 @@ public class Contacts extends Home {
         assistantInput.sendKeys(data.get("assistant"));
         referredByInput.sendKeys(data.get("referredBy"));
 
-        //TODO
         sourceDropDown.click();
         sourceDropDown.findElement(By.xpath("//div/div/span[text()='"+data.get("source")+"']")).click();
 
@@ -240,6 +230,5 @@ public class Contacts extends Home {
          imageInput.sendKeys(data.get("imagePath"));
 
     }
-
 
 }
