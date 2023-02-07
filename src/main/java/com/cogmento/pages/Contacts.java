@@ -37,7 +37,7 @@ public class Contacts extends Home {
     @FindBy(xpath = "//div[@class='twelve wide field']")
     private WebElement usersAllowedAccess;
 
-    @FindBy(xpath = "//label[@for='tags']/div/input")
+    @FindBy(xpath = "//*[@id=\"main-content\"]/div/div[2]/form/div[3]/div[2]/div/label[2]/div/input")
     private WebElement tagsInput;
 
     @FindBy(xpath = "//input[@name='value' and @placeholder='Email address']")
@@ -67,7 +67,7 @@ public class Contacts extends Home {
     @FindBy(xpath = "//label[text()='Social Channels']/following-sibling::div//button")
     private WebElement addSocialChannelIcon;
 
-    @FindBy(xpath = "//label[text()='Time Zone']/following-sibling::div[@name='timezone']")
+    @FindBy(xpath = "//label[text()='Time Zone']/following-sibling::div[@name='timezone']/input")
     private WebElement timeZoneInput;
 
     @FindBy(name = "address")
@@ -130,7 +130,7 @@ public class Contacts extends Home {
     @FindBy(name = "day")
     private WebElement birthDay;
 
-    @FindBy(name = "month")
+    @FindBy(xpath = "//div[@name='month']")
     private WebElement birthMonth;
 
     @FindBy(name = "year")
@@ -163,7 +163,7 @@ public class Contacts extends Home {
             usersAllowedAccess.sendKeys("Shakhzod");
         }
 
-        tagsInput.sendKeys(data.get("tags"));
+        tagsInput.sendKeys(data.get("tags")+Keys.ENTER);
         emailInput.sendKeys(data.get("email"));
         typeOfEmail.sendKeys(data.get("typeOfEmail"));
 
@@ -185,13 +185,15 @@ public class Contacts extends Home {
         socialChannelLink.sendKeys(data.get("channelLink"));
 
         //TODO
-        timeZoneInput.click();
-        timeZoneInput.findElement(By.xpath("//div/div/span")).click();
+        timeZoneInput.sendKeys(data.get("timezone"));
+//        timeZoneInput.findElement(By.xpath("//div/div/span")).click();
 
 
         streetInput.sendKeys(data.get("street"));
         cityInput.sendKeys(data.get("city"));
         stateInput.sendKeys(data.get("state/county"));
+
+        data.put("zip", (int)Double.parseDouble(data.get("zip"))+"");
         zipInput.sendKeys(data.get("zip"));
 
         //TODO
@@ -224,8 +226,13 @@ public class Contacts extends Home {
             doNotTextInput.click();
         }
 
+        data.put("birthday", (int)Double.parseDouble(data.get("birthday"))+"");
         birthDay.sendKeys(data.get("birthday"));
-        birthMonth.sendKeys(data.get("birthmonth"));
+
+        birthMonth.click();
+        birthMonth.findElement(By.xpath("//div/div/span[text()='"+data.get("birthmonth")+"']")).click();
+
+        data.put("birthyear", (int)Double.parseDouble(data.get("birthyear"))+"");
         birthYear.sendKeys(data.get("birthyear"));
         identifierInput.sendKeys(data.get("identifier"));
         imageInput.sendKeys(data.get("imagePath"));
