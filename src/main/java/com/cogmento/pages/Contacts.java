@@ -16,8 +16,8 @@ public class Contacts extends Home {
         super(driver, softAssert);
     }
 
-    @FindBy(xpath = "//button[@class='ui linkedin button' and text()='Create']")
-    private WebElement createNewContactBtn;
+    @FindBy(xpath = "//button[text()='Save']")
+    protected WebElement createContactButton;
 
     @FindBy(name = "first_name")
     private WebElement firstNameInput;
@@ -148,10 +148,12 @@ public class Contacts extends Home {
     @FindBy(xpath = "//button[@class='ui button' and text()='Cancel']  ")
     private WebElement cancelBtn;
 
-    public void createContacts(HashMap<String, String> data) {
+    public void createContacts(HashMap<String, String> data) throws InterruptedException {
         navigate("Contacts");
-//        softAssert.assertTrue(createNewContactBtn.isEnabled(),"Create new contact button is not enabled");
-        driver.findElement(By.xpath("//*[@id=\"dashboard-toolbar\"]/div[2]/div/a/button")).click();
+        Thread.sleep(5000);
+        softAssert.assertTrue(createContactButton.isEnabled(), "Create button is not enabled");
+        createContactButton.click();
+
 
         firstNameInput.sendKeys(data.get("firstname"));
         lastNameInput.sendKeys(data.get("lastname"));
@@ -235,7 +237,7 @@ public class Contacts extends Home {
         data.put("birthyear", (int)Double.parseDouble(data.get("birthyear"))+"");
         birthYear.sendKeys(data.get("birthyear"));
         identifierInput.sendKeys(data.get("identifier"));
-        imageInput.sendKeys(data.get("imagePath"));
+         imageInput.sendKeys(data.get("imagePath"));
 
     }
 
