@@ -9,7 +9,6 @@ public class ConfigReader {
 
     private ConfigReader(){}
 
-    private WebDriver driver;
     private static Properties properties;
     private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
 

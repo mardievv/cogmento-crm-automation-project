@@ -16,7 +16,7 @@ public class Contacts extends Home {
         super(driver, softAssert);
     }
 
-    @FindBy(xpath = "//button[text()='Save']")
+    @FindBy(xpath = "(//button[normalize-space()='Create'])[1]")
     protected WebElement createContactButton;
 
     @FindBy(name = "first_name")
