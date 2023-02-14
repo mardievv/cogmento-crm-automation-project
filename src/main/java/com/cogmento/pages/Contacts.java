@@ -6,14 +6,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.SoftAssert;
+import org.testng.Assert;
 
 import java.util.HashMap;
 
 public class Contacts extends Home {
 
-    public Contacts(WebDriver driver, SoftAssert softAssert) {
-        super(driver, softAssert);
+    public Contacts(WebDriver driver) {
+        super(driver);
     }
 
     @FindBy(xpath = "(//button[normalize-space()='Create'])[1]")
@@ -150,7 +150,7 @@ public class Contacts extends Home {
 
     public void createContacts(HashMap<String, String> data){
         navigate("Contacts");
-        softAssert.assertTrue(createContactButton.isEnabled(), "Create button is not enabled");
+        Assert.assertTrue(createContactButton.isEnabled(), "Create button is not enabled");
         createContactButton.click();
 
 

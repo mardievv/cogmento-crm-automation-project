@@ -13,8 +13,8 @@ public class ContactsTest extends BaseTest{
 
     @Test(dataProvider = "contacts")
     public void createPositiveContact(HashMap<String,String> data){
-        Login login = new Login(driver,softAssert);
-        Contacts contacts = new Contacts(driver,softAssert);
+        Login login = new Login(driver);
+        Contacts contacts = new Contacts(driver);
 
         login.navigateToLoginPage();
         login.login();

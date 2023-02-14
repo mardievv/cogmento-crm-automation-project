@@ -4,12 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.asserts.SoftAssert;
+import org.testng.Assert;
+
 
 public class Home extends BasePage {
 
-    public Home(WebDriver driver, SoftAssert softAssert){
-        super(driver,softAssert);
+    public Home(WebDriver driver){
+        super(driver);
     }
 
     @FindBy(xpath = "//div[@class='header item']")
@@ -72,7 +73,7 @@ public class Home extends BasePage {
     protected void navigate(String page){
         WebElement pageLink = driver.findElement(By.xpath("//div[@class='menu-item-wrapper']//span[text()='"+page+"']"));
         actions.moveToElement(leftNavBarMenu).build().perform();
-        softAssert.assertTrue(pageLink.isEnabled(),"Page link is not enabled");
+        Assert.assertTrue(pageLink.isEnabled(),"Page link is not enabled");
         pageLink.click();
 
     }
