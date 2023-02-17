@@ -28,12 +28,17 @@ public class ExcelReader {
 
     public Object[][] getData(){
 
-        int rows = worksheet.getLastRowNum(); // returns number of rows
+        int rows = getNumberOfRunRows(); // returns number of rows
         int cols = worksheet.getRow(0).getLastCellNum(); //returns number of cols
 
         Object[][] data = new Object[rows][1];
 
         for (int i = 0; i < rows; i++) {
+            XSSFCell runCell = worksheet.getRow(i+1).getCell(0);
+            if (runCell != null){
+                if(!runCell.toString().equals("y")) continue;
+            }
+
             Map<String,String> map = new HashMap<>();
 
             for (int j = 0; j < cols; j++) {
@@ -46,6 +51,21 @@ public class ExcelReader {
             data[i][0] = map;
         }
         return data;
+    }
+
+
+    private int getNumberOfRunRows(){
+        int counter = 0;
+        int rows = worksheet.getLastRowNum(); // returns num of rows
+        for (int i = 0; i < rows; i++) {
+            XSSFCell runCell = worksheet.getRow(i+1).getCell(0);
+            if (runCell != null){
+                if (runCell.toString().equals("y")){
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 
 
