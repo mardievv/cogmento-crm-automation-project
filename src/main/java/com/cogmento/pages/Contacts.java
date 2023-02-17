@@ -16,8 +16,11 @@ public class Contacts extends Home {
         super(driver);
     }
 
-    @FindBy(xpath = "(//button[normalize-space()='Create'])[1]")
+    @FindBy(xpath = "//button[normalize-space()='Create']/i")
     protected WebElement createContactButton;
+
+    @FindBy(xpath = "//button[normalize-space()='Save']/i")
+    protected WebElement saveContactButton;
 
     @FindBy(name = "first_name")
     private WebElement firstNameInput;
@@ -148,7 +151,7 @@ public class Contacts extends Home {
     @FindBy(xpath = "//button[@class='ui button' and text()='Cancel']  ")
     private WebElement cancelBtn;
 
-    public void createContacts(HashMap<String, String> data){
+    public void createContacts(HashMap<String, String> data) {
         navigate("Contacts");
         Assert.assertTrue(createContactButton.isEnabled(), "Create button is not enabled");
         createContactButton.click();
@@ -228,6 +231,8 @@ public class Contacts extends Home {
         birthYear.sendKeys(data.get("birthyear"));
         identifierInput.sendKeys(data.get("identifier"));
          imageInput.sendKeys(data.get("imagePath"));
+         Assert.assertTrue(saveContactButton.isEnabled());
+         saveContactButton.click();
 
     }
 
