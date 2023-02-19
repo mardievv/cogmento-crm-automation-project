@@ -34,6 +34,7 @@ public class Driver {
                 prefs.put("profile.password_manager_enabled",false);
                 prefs.put("profile.default_content_setting_values.notifications",2);
                 options.setExperimentalOption("prefs",prefs);
+//                options.addArguments("--headless");
                 driver = new ChromeDriver();
                 break;
             case "safari":
